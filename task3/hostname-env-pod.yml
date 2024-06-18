@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hostname-env-pod
+spec:
+  containers:
+  - name: hostname-env-container
+    image: busybox
+    command: ['sh', '-c', 'echo $(HOSTNAME) && sleep 3600']
+    env:
+    - name: HOSTNAME
+      valueFrom:
+        fieldRef:
+          fieldPath: spec.nodeName

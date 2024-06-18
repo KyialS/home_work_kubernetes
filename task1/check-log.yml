@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: check-log-secret
+  namespace: candoit
+type: Opaque
+data:
+  my-secret: dGhpcyBpcyBhIHNlY3JldCBtZXNzYWdl  # "this is a secret message" закодировано в base64

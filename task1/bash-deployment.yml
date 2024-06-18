@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bash-deployment
+  namespace: candoit
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: bash
+  template:
+    metadata:
+      labels:
+        app: bash
+    spec:
+      containers:
+      - name: bash
+        image: bash
+        command: ["bash", "-c", "while true; do echo $(cat /etc/my-config/my-config) $(cat /etc/my-secret/my-secret); sleep 10; done"]
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/my-config
+        - name: secret-volume
+          mountPath: /etc/my-secret
+      volumes:
+      - name: config-volume
+        configMap:
+          name: check-log-configmap
+      - name: secret-volume
+        secret:
+          secretName: check-log-secret

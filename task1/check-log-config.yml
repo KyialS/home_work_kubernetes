@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: check-log-configmap
+  namespace: candoit
+data:
+  my-config: |
+    name: YourName
+    age: YourAge
+    occupation: YourOccupation

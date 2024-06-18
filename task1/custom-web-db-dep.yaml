@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: custom-web-db-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: custom-web-db
+  template:
+    metadata:
+      labels:
+        app: custom-web-db
+    spec:
+      containers:
+      - name: custom-web-db
+        image: your-custom-image:latest
+        ports:
+        - containerPort: 80
