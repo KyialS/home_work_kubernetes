@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodeappdeployment
+  namespace: default
+  labels:
+    type: backend
+    app: nodeapp
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      type: backend
+      app: nodeapp
+  template:
+    metadata:
+      labels:
+        type: backend
+        app: nodeapp
+    spec:
+      containers:
+        - name: nodeappcontainer
+          image: us.gcr.io/skilled-loader-426007-f7/nodeapp:v1
+          ports: 
+            - containerPort: 80
