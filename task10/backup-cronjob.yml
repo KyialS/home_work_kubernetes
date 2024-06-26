@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: mongodb-backup-cronjob
+spec:
+  schedule: "0 0 * * *"  # Runs at midnight every day
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: backup
+            image: mongo:latest
+            command: ["sh", "-c", "mongodump --uri=mongodb://mongodb:27017/mydatabase --out=/backup && echo Backup completed!"]
+            volumeMounts:
+            - name: backup-storage
+              mountPath: /backup
+          restartPolicy: OnFailure
+          volumes:
+          - name: backup-storage
+            persistentVolumeClaim:
+              claimName: backup-pvc
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
