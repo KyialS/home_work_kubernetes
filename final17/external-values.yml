@@ -1,0 +1,7 @@
+provider: google
+google:
+  project: instant-bonfire-426007-n2
+policy: sync
+txtOwnerId: my-identifier
+domainFilters:
+  - sadbks.online
